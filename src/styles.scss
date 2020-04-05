@@ -1,1 +1,179 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #e8f7ec}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.login_page {
+  width: 50%;
+  margin: 0px auto;
+  padding: 40px 0;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+.login_form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  min-height: 180px;
+  margin-top: 40px;
+  padding-top: 40px;
+  background-color: #90d7a4;
+  border-radius: 12px;
+}
+
+.error_message {
+  display: block;
+  max-width: 80%;
+  margin: 10px auto;
+  color: #d44110;
+}
+
+.input-container{
+  position:relative;
+  width: 80%;
+  margin:0 auto 25px;
+}
+.input-container label{
+  position:absolute;
+  top:0px;
+  left:0px;
+  font-size:16px;
+  color: black;
+  pointer-event:none;
+  transition: all 0.5s ease-in-out;
+}
+.input-container input{
+  width: 100%;
+  border:0;
+  border-bottom:1px solid #555;
+  background:transparent;
+  padding:8px 0 5px 0;
+  font-size:16px;
+  color:black;
+}
+.input-container input:focus{
+  border:none;
+  outline:none;
+  border-bottom:2px solid #22af4a;
+}
+
+.input-container input:focus ~ label,
+.input-container input:valid ~ label{
+  top:-12px;
+  font-size:12px;
+}
+
+.login_button {
+  width: 65%;
+  background-color:#4ebf6e;
+  border-radius:42px;
+  border:1px solid #18ab29;
+  display:block;
+  cursor:pointer;
+  font-family:Arial;
+  font-size:16px;
+  padding:8px 85px;
+  text-decoration:none;
+  text-shadow:0px 0px 19px #2f6627;
+  margin: 35px auto 10px;
+}
+.login_button:hover {
+  background:linear-gradient(to bottom, #4ebf6e 5%, #22af4a 100%);
+  background-color:#4ebf6e;
+}
+.login_button:active {
+  position:relative;
+  top:1px;
+}
+
+.logout_button {
+  max-width: 30px;
+  border-radius: 30px;
+  background-color: #d44110;
+}
+
+.back_button {
+  max-width: 30px;
+  border-radius: 30px;
+  background-color: #d44110;
+}
+
+.page_content {
+  max-width: 90%;
+  min-height: 100%;
+  background-color: #bce7c8;
+  margin: auto;
+}
+
+.page_header {
+  min-height: 60px;
+  max-width: 100%;
+  background-color: #22af4a;
+  margin-bottom: 30px;
+}
+
+.list_item {
+  max-width: 90%;
+  margin: 5px auto;
+}
+
+.table_item {
+  width: 90%;
+  margin: 5px auto;
+  padding-bottom: 30px;
+}
+
+.card {
+  cursor: pointer;
+}
+
+/*new table*/
+.schedule_table {
+  width: 100%;
+  background-color: white;
+}
+
+.internal_table {
+  border-bottom: 1px solid black;
+}
+
+.day_header {
+  width: 15%;
+  border-right: 1px solid black;
+}
+
+.day_item {
+  width: 15%;
+  border-right: 1px solid black;
+}
+
+.time_header {
+  width: 20%;
+  border-right: 1px solid black;
+}
+
+.time_item {
+  width: 20%;
+  border-right: 1px solid black;
+}
+
+.lesson_header {
+  width: 80%;
+}
+
+.lesson_item {
+  width: 40%
+}
+
+
