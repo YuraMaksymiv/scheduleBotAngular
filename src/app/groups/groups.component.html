@@ -1,0 +1,5 @@
+<div *ngFor="let section of groups" class="list_item">
+  <mat-card class="card" [routerLink]= "['/sections', section.section]">{{section.section}}</mat-card>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,13 @@
+<mat-paginator class="list_item" style="background-color: #90d7a4"
+               [length]="groupsLength"
+               [pageSize]="size"
+               [pageIndex]="page"
+               [pageSizeOptions]="[4, 8, 12]"
+               (page)="getData($event)">
+</mat-paginator>
+
+<div *ngFor="let group of data" class="list_item">
+  <mat-card class="card" [routerLink]= "['/sections', section, 'groups' , group.groupName]">{{group.groupName}}</mat-card>
+</div>
+
+

@@ -1,0 +1,49 @@
+<div class="table_item">
+  <mat-form-field>
+    <mat-label>Choose group</mat-label>
+    <mat-select [(ngModel)]="currentGroup" (valueChange)="getScheduleByName($event)">
+      <mat-option *ngFor="let group of groups" [value]="group">
+        {{group}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div style="color: green" (click)="saveClick()">
+    <mat-icon>save</mat-icon>
+    <p *ngIf="updatingError" style="color: red">{{updatingError}}</p>
+  </div>
+
+  <table class="schedule_table">
+    <tr>
+      <th class="day_header">
+        <p>Day</p>
+      </th>
+      <th>
+        <div class="time_header">Time</div>
+        <div class="lesson_header">Lesson name</div>
+      </th>
+    </tr>
+
+    <tr style="border-top: 1px solid black" *ngFor="let day of currentSchedule, index as dayIndex">
+      <td class="day_item">
+        {{day.day}}
+      </td>
+      <td>
+        <table>
+          <tr class="internal_table" *ngFor="let time of times, index as i">
+            <td class="time_item">
+              {{time}}
+            </td>
+            <td class="lesson_item" style="border-right: 1px solid black">
+              <app-schedule-item [inputItem] ="getLessonNameByNumber(i + 1, day.lesson, 0)" (onChanged)="onChanged($event, i, dayIndex, 0)"></app-schedule-item>
+            </td>
+            <td class="lesson_item">
+              <app-schedule-item [inputItem] ="getLessonNameByNumber(i + 1, day.lesson, 1)" (onChanged)="onChanged($event, i, dayIndex, 1)"></app-schedule-item>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+
