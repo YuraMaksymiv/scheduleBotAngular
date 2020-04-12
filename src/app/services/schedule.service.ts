@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {APIResponse} from '../Interfaces/API_Response';
 import {Hosts} from '../enums/hosts';
@@ -9,15 +9,12 @@ import {Hosts} from '../enums/hosts';
 })
 export class ScheduleService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+  public getSchedule(name): Observable<APIResponse> {
+    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/schedule?name=${name}`);
   }
 
-
-  getSchedule(name): Observable<APIResponse> {
-    return this.http.get<any>(`${Hosts.API_HOST}/api/schedule?name=${name}`);
-  }
-
-  updateSchedule(schedule): Observable<APIResponse> {
-    return this.http.post<any>(`${Hosts.API_HOST}/api/schedule`, {group: schedule.groupName, schedule: schedule});
+  public updateSchedule(schedule): Observable<APIResponse> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/schedule`, {schedule: schedule});
   }
 }

@@ -5,13 +5,16 @@ import {APIResponse} from '../Interfaces/API_Response';
 import {Hosts} from '../enums/hosts';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
+  public loginUser(username, password): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user/login`, {username: username, password: password});
+  }
 
-  loginUser(username, password): Observable<any> {
-    return this.http.post<any>(`${Hosts.API_HOST}/api/user/login`, {username: username, password: password});
+  public registerUser(username, password): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user/register`, {username: username, password: password});
   }
 }

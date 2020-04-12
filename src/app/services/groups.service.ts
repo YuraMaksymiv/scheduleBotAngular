@@ -9,19 +9,16 @@ import {Hosts} from '../enums/hosts';
 })
 export class GroupsService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {}
+  public getAllGroups(): Observable<APIResponse> {
+    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups`);
   }
 
-
-  getAllGroups(): Observable<APIResponse> {
-    return this.http.get<any>(`${Hosts.API_HOST}/api/groups`);
+  public getGroupsBySection(section): Observable<APIResponse> {
+    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups/groupsListBySection/${section}`);
   }
 
-  getGroupsBySection(section): Observable<APIResponse> {
-    return this.http.get<any>(`${Hosts.API_HOST}/api/groups/groupsListBySection/${section}`);
-  }
-
-  getUsersForGroup(groupName): Observable<APIResponse> {
-    return this.http.post<any>((`${Hosts.API_HOST}/getUsersForGroup`), {params: {group: groupName}});
+  public getUsersForGroup(groupName): Observable<APIResponse> {
+    return this.http.post<APIResponse>((`${Hosts.API_HOST}/api/user/getUsersForGroup`), {group: groupName});
   }
 }
