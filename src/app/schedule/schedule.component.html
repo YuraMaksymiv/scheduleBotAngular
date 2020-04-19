@@ -8,8 +8,8 @@
     </mat-select>
   </mat-form-field>
 
-  <div style="color: green" (click)="saveClick()">
-    <mat-icon>save</mat-icon>
+  <div style="float: right" (click)="saveClick()">
+    <button mat-raised-button class="header_item">Save</button>
     <p *ngIf="updatingError" style="color: red">{{updatingError}}</p>
   </div>
 

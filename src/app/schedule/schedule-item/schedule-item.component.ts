@@ -10,9 +10,6 @@ export class ScheduleItemComponent implements OnInit {
   constructor() { }
 
   @Output() onChanged = new EventEmitter<any>();
-  // change(increased:any) {
-  //   this.onChanged.emit(increased);
-  // }
 
   @Input() inputItem;
   @ViewChild('f', {static: false}) inputRef: ElementRef;

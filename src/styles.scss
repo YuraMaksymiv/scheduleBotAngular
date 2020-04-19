@@ -30,12 +30,14 @@ table {
   padding-top: 40px;
   background-color: #90d7a4;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .error_message {
   display: block;
   max-width: 80%;
-  margin: 10px auto;
+  margin: 5px auto;
   color: #d44110;
 }
 
@@ -44,69 +46,21 @@ table {
   width: 80%;
   margin:0 auto 25px;
 }
-.input-container label{
-  position:absolute;
-  top:0px;
-  left:0px;
-  font-size:16px;
-  color: black;
-  pointer-event:none;
-  transition: all 0.5s ease-in-out;
-}
-.input-container input{
-  width: 100%;
-  border:0;
-  border-bottom:1px solid #555;
-  background:transparent;
-  padding:8px 0 5px 0;
-  font-size:16px;
-  color:black;
-}
-.input-container input:focus{
-  border:none;
-  outline:none;
-  border-bottom:2px solid #22af4a;
-}
 
-.input-container input:focus ~ label,
-.input-container input:valid ~ label{
-  top:-12px;
-  font-size:12px;
+.login_button_container {
+  margin: 25px;
 }
 
 .login_button {
-  width: 65%;
-  background-color:#4ebf6e;
+  width: 100%;
   border-radius:42px;
   border:1px solid #18ab29;
-  display:block;
   cursor:pointer;
   font-family:Arial;
   font-size:16px;
-  padding:8px 85px;
-  text-decoration:none;
-  text-shadow:0px 0px 19px #2f6627;
-  margin: 35px auto 10px;
-}
-.login_button:hover {
-  background:linear-gradient(to bottom, #4ebf6e 5%, #22af4a 100%);
-  background-color:#4ebf6e;
-}
-.login_button:active {
-  position:relative;
-  top:1px;
-}
-
-.logout_button {
-  max-width: 30px;
-  border-radius: 30px;
-  background-color: #d44110;
-}
-
-.back_button {
-  max-width: 30px;
-  border-radius: 30px;
-  background-color: #d44110;
+  background-color: #6bc985;
+  color: darkgreen;
+  font-weight: bold;
 }
 
 .page_content {
@@ -117,10 +71,24 @@ table {
 }
 
 .page_header {
-  min-height: 60px;
+  min-height: 50px;
   max-width: 100%;
-  background-color: #22af4a;
+  background-color: #4ebf6e;
   margin-bottom: 30px;
+}
+
+.header_content {
+  margin: 0 auto;
+  padding: 6px;
+  display: flex;
+  max-width: 96%;
+  justify-content: space-between;
+}
+
+.header_item {
+  background-color: #90d7a4;
+  color: darkgreen;
+  font-weight: bold;
 }
 
 .list_item {
@@ -176,4 +144,23 @@ table {
   width: 40%
 }
 
+//menu
+.menu {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 80px auto;
+  max-width: 80%;
+  background-color: #90d7a4;
+}
+
+.menu-item {
+  flex-basis: 35%;
+  margin: 20px auto;
+  max-width: 80%;
+  min-height: 60px;
+  text-align: center;
+  font-size: 28px;
+  cursor: pointer;
+}
 

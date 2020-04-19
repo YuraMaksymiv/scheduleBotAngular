@@ -27,17 +27,16 @@ export class LoginComponent implements OnInit {
   errorText: string;
 
   login(loginForm) {
-    console.log(loginForm);
     this.isError = false;
     this.userServise.loginUser(loginForm.username, loginForm.password)
       .subscribe((response: any) => {
         if(response) {
-          if(response.success === false) {
+          if(response.code !== 200) {
             this.isError = true;
-            this.errorText = response.message;
-          } else {
+            this.errorText = response.data;
+          } else if (response.code === 200) {
             localStorage.setItem("token", response.token);
-            this.router.navigate(['/'])
+            this.router.navigate(['']);
           }
         }
       })

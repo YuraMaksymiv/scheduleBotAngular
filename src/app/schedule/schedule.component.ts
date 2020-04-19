@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ScheduleService} from '../services/schedule.service';
+import {GroupsService} from '../services/groups.service';
 import {APIResponse} from '../Interfaces/API_Response';
 import {filter} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-schedule',
@@ -11,7 +13,9 @@ import {filter} from 'rxjs/operators';
 export class ScheduleComponent implements OnInit {
 
   constructor(
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private groupsService: GroupsService,
+    private route: ActivatedRoute,
   ) {}
 
   schedule: any;
@@ -19,11 +23,12 @@ export class ScheduleComponent implements OnInit {
   currentSchedule: any;
   changedSchedule: any;
   times = ["9.30-10.05", "10.20-11.55", "12.10-13.45", "14.30-16.05", "16.20-17.35"];
-  groups = ["КН - 11/1", "КН - 41/1", "КН - 41/2"];
-  currentGroup = "КН - 11/1";
+  currentGroup: any;
+  groups: [];
   currentName: string;
   print = false;
   updatingError: any;
+  params: any;
 
   onChanged(increased, lessonIndex, dayIndex, columnIndex){
     let time = this.times[lessonIndex];
@@ -40,7 +45,7 @@ export class ScheduleComponent implements OnInit {
     if(!isLessonExist) {
       let newLesson = {
         numberOfLesson : lessonNumber,
-        nameOfLesson: ["0", "0"],
+        nameOfLesson: ["-/-", "-/-"],
         time: time
       };
       newLesson.nameOfLesson[columnIndex] = increased;
@@ -53,13 +58,23 @@ export class ScheduleComponent implements OnInit {
   getScheduleByName(groupName): void {
     this.scheduleService.getSchedule(groupName)
       .subscribe((response: APIResponse) => {
-        if (response) {
-          this.schedule = response;
-          this.schedule = this.schedule.schedule;
+        if (response.code === 200) {
+          this.schedule = response.data;
           this.currentName = this.schedule.groupName;
           this.currentSchedule = this.schedule.days;
-          console.log(this.currentSchedule);
           this.changedSchedule = JSON.parse(JSON.stringify(this.currentSchedule));
+        }
+      });
+  };
+
+  getOtherGroupNames(section, mainGroup): void {
+    let groups;
+    this.groupsService.getGroupsBySection(section)
+      .subscribe((response: APIResponse) => {
+        if (response.code === 200) {
+          groups = response.data;
+          groups = groups.groups.filter(i => i.groupName === mainGroup)[0];
+          this.groups = groups.groupList;
         }
       });
   };
@@ -80,8 +95,8 @@ export class ScheduleComponent implements OnInit {
     this.scheduleService.updateSchedule(toUpdate)
       .subscribe((response: APIResponse) => {
         if (response) {
-          if(!response.success) {
-            this.updatingError = response.message;
+          if(response.code !== 200) {
+            this.updatingError = response.data;
             this.getScheduleByName(this.currentName);
           } else {
             this.updated = response;
@@ -92,7 +107,12 @@ export class ScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getScheduleByName(this.groups[0]);
+    this.route.queryParams.subscribe(params => {
+      this.params = params;
+    });
+    this.currentGroup = this.params.group;
+    this.getOtherGroupNames(this.params.section, this.params.mainGroup);
+    this.getScheduleByName(this.params.group);
   }
 
 }

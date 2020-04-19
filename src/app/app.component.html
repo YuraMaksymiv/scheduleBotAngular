@@ -1,10 +1,8 @@
 <div class="page_content">
   <div *ngIf="isLogged" class="page_header">
-    <div class="back_button">
-      <mat-icon>arrow_back</mat-icon>
-    </div>
-    <div class="logout_button">
-      <mat-icon>logout</mat-icon>
+    <div class="header_content">
+      <button mat-raised-button class="header_item">Back</button>
+      <button mat-raised-button class="header_item" (click)="logoutClick()">Logout</button>
     </div>
   </div>
   <router-outlet></router-outlet>

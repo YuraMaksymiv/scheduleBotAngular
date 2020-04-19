@@ -6,7 +6,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { GroupsComponent } from './groups/groups.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule, MatListModule, MatPaginatorModule, MatSelectModule, MatTableModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatTableModule
+} from '@angular/material';
 import {MatCardModule} from '@angular/material';
 import { GroupListsComponent } from './groups/group-lists/group-lists.component';
 import { GroupNamesComponent } from './groups/group-names/group-names.component';
@@ -16,9 +24,10 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ScheduleItemComponent } from './schedule/schedule-item/schedule-item.component';
 import { LoginComponent } from './login/login.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
-  // {path: '', component: AppComponent},
+  {path: '', component: MenuComponent},
   {path: 'login', component: LoginComponent},
   {path: 'sections', component: GroupsComponent},
   {path: 'sections/:section', component: GroupListsComponent, pathMatch: 'full'},
@@ -36,7 +45,8 @@ const routes: Routes = [
     UsersForGroupComponent,
     ScheduleComponent,
     ScheduleItemComponent,
-    LoginComponent
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +61,9 @@ const routes: Routes = [
     MatSelectModule,
     FormsModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

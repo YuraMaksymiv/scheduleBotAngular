@@ -35,8 +35,8 @@ export class GroupListsComponent implements OnInit {
   getGroupsBySection(section): void {
     this.groupService.getGroupsBySection(section)
       .subscribe((response: APIResponse) => {
-        if (response) {
-          this.groupsFromSection = response;
+        if (response.code === 200) {
+          this.groupsFromSection = response.data;
           this.groupsFromSection = this.groupsFromSection.groups;
           this.groupsLength = this.groupsFromSection.length;
           this.getData({pageIndex: this.page, pageSize: this.size});
