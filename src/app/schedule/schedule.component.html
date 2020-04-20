@@ -1,6 +1,6 @@
 <div class="table_item">
   <mat-form-field>
-    <mat-label>Choose group</mat-label>
+    <mat-label>Виберіть групу</mat-label>
     <mat-select [(ngModel)]="currentGroup" (valueChange)="getScheduleByName($event)">
       <mat-option *ngFor="let group of groups" [value]="group">
         {{group}}
@@ -8,42 +8,32 @@
     </mat-select>
   </mat-form-field>
 
-  <div style="float: right" (click)="saveClick()">
-    <button mat-raised-button class="header_item">Save</button>
+  <div style="float: right">
+    <button *ngIf="isEdit" mat-raised-button class="header_item" (click)="saveClick()">Зберегти</button>
     <p *ngIf="updatingError" style="color: red">{{updatingError}}</p>
   </div>
 
   <table class="schedule_table">
+    <thead>
     <tr>
-      <th class="day_header">
-        <p>Day</p>
-      </th>
-      <th>
-        <div class="time_header">Time</div>
-        <div class="lesson_header">Lesson name</div>
-      </th>
+      <th style="border-right: 3px solid #177a33; height: 40px">День</th>
+      <th style="border-right: 3px solid #177a33; height: 40px">Час</th>
+      <th style="border-right: 3px solid #177a33; height: 40px">Непарний</th>
+      <th style="border-left: 3px solid #177a33; height: 40px">Парний</th>
     </tr>
-
-    <tr style="border-top: 1px solid black" *ngFor="let day of currentSchedule, index as dayIndex">
-      <td class="day_item">
-        {{day.day}}
+    </thead>
+    <tbody *ngFor="let day of currentSchedule; index as dayIndex">
+    <tr *ngFor="let cell of day.lesson; index as i let isFirst = first">
+      <td *ngIf="isFirst" [attr.rowspan]="day.lesson.length" class="table_day_row">{{day.day}}</td>
+      <td class="table_row">{{times[i]}}</td>
+      <td class="table_row">
+        <app-schedule-item [inputItem] ="cell.nameOfLesson[0]" (onChanged)="onChanged($event, i, dayIndex, 0)"></app-schedule-item>
       </td>
-      <td>
-        <table>
-          <tr class="internal_table" *ngFor="let time of times, index as i">
-            <td class="time_item">
-              {{time}}
-            </td>
-            <td class="lesson_item" style="border-right: 1px solid black">
-              <app-schedule-item [inputItem] ="getLessonNameByNumber(i + 1, day.lesson, 0)" (onChanged)="onChanged($event, i, dayIndex, 0)"></app-schedule-item>
-            </td>
-            <td class="lesson_item">
-              <app-schedule-item [inputItem] ="getLessonNameByNumber(i + 1, day.lesson, 1)" (onChanged)="onChanged($event, i, dayIndex, 1)"></app-schedule-item>
-            </td>
-          </tr>
-        </table>
+      <td class="table_row">
+        <app-schedule-item [inputItem] ="cell.nameOfLesson[1]" (onChanged)="onChanged($event, i, dayIndex, 1)"></app-schedule-item>
       </td>
     </tr>
+    </tbody>
   </table>
 </div>
 

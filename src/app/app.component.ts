@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {APIResponse} from './Interfaces/API_Response';
 import {GroupsService} from './services/groups.service';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,12 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private router: Router
+    private router: Router,
+    private _location: Location
   ) {}
 
   isLogged: boolean;
+  inMenu = false;
 
   checkLogin() {
     if(localStorage.getItem("token")) {
@@ -22,6 +25,10 @@ export class AppComponent implements OnInit {
       this.isLogged = false;
       this.router.navigate(['/login']);
     }
+  }
+
+  backClick(): void {
+    this._location.back();
   }
 
   logoutClick(): void {

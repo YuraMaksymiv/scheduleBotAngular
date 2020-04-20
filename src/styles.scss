@@ -96,10 +96,20 @@ table {
   margin: 5px auto;
 }
 
-.table_item {
-  width: 90%;
+.section_list {
+  max-width: 75%;
   margin: 5px auto;
-  padding-bottom: 30px;
+}
+
+.section_item {
+  margin: 20px auto;
+  max-width: 100%;
+  text-align: center;
+  font-size: 28px;
+}
+
+.section_item_text {
+  padding: 12px;
 }
 
 .card {
@@ -109,39 +119,42 @@ table {
 /*new table*/
 .schedule_table {
   width: 100%;
-  background-color: white;
+  background-color: #90d7a4;
+  color: #177a33;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.internal_table {
-  border-bottom: 1px solid black;
+.table_item {
+  width: 90%;
+  margin: 5px auto;
+  padding-bottom: 30px;
 }
 
-.day_header {
-  width: 15%;
-  border-right: 1px solid black;
+.table_day_row {
+  max-width: 20%;
+  border-top: 3px solid #177a33;
+  text-align: center;
 }
 
-.day_item {
-  width: 15%;
-  border-right: 1px solid black;
+.table_row {
+  border-top: 3px solid #177a33;
+  border-left: 3px solid #177a33;
+  margin: 5px auto;
+  text-align: center;
+  padding: 8px;
 }
 
-.time_header {
-  width: 20%;
-  border-right: 1px solid black;
-}
-
-.time_item {
-  width: 20%;
-  border-right: 1px solid black;
-}
-
-.lesson_header {
-  width: 80%;
-}
-
-.lesson_item {
-  width: 40%
+.item_input {
+  width: 100%;
+  background-color: #90d7a4;
+  color: #177a33;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
 }
 
 //menu
@@ -150,6 +163,7 @@ table {
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 80px auto;
+  padding: 40px;
   max-width: 80%;
   background-color: #90d7a4;
 }
@@ -158,9 +172,12 @@ table {
   flex-basis: 35%;
   margin: 20px auto;
   max-width: 80%;
-  min-height: 60px;
   text-align: center;
   font-size: 28px;
   cursor: pointer;
+}
+
+.menu-text {
+  padding: 20px;
 }
 

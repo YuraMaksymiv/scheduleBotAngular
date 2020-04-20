@@ -18,6 +18,7 @@ export class ScheduleItemComponent implements OnInit {
 
   changeEvent(value: any): void{
     this.isItemFocused = false;
+    if(!value || value === '') value = '-/-';
     this.inputItem = value;
     this.onChanged.emit(value);
   }

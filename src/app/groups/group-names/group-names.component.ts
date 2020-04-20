@@ -19,6 +19,20 @@ export class GroupNamesComponent implements OnInit {
   params: any;
   groupsFromSection: any;
   groupNames: any;
+  groupsLength: any;
+  data = [];
+  size = 4;
+  page = 0;
+
+  getData(obj) {
+    let index = 0;
+    const startingIndex = obj.pageIndex * obj.pageSize;
+    const endingIndex = startingIndex + obj.pageSize;
+    this.data = this.groupNames.filter(() => {
+      index++;
+      return (index > startingIndex && index <= endingIndex) ? true : false;
+    });
+  }
 
   getSchedule(groupName): void {
     this.router.navigate(['/schedule'], {queryParams: {group: groupName, section: this.params.section, mainGroup: this.params.groupName}});
@@ -32,6 +46,8 @@ export class GroupNamesComponent implements OnInit {
           this.groupsFromSection = this.groupsFromSection.groups;
           this.groupNames = this.groupsFromSection.filter(i => i.groupName === groupName)[0];
           this.groupNames = this.groupNames.groupList;
+          this.groupsLength = this.groupNames.length;
+          this.getData({pageIndex: this.page, pageSize: this.size});
         }
       });
   }

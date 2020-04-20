@@ -21,7 +21,6 @@ export class ScheduleComponent implements OnInit {
   schedule: any;
   updated: any;
   currentSchedule: any;
-  changedSchedule: any;
   times = ["9.30-10.05", "10.20-11.55", "12.10-13.45", "14.30-16.05", "16.20-17.35"];
   currentGroup: any;
   groups: [];
@@ -29,29 +28,20 @@ export class ScheduleComponent implements OnInit {
   print = false;
   updatingError: any;
   params: any;
+  isEdit = false;
+
 
   onChanged(increased, lessonIndex, dayIndex, columnIndex){
-    let time = this.times[lessonIndex];
+    this.isEdit = !this.isEdit;
     lessonIndex++;
     let isLessonExist = false;
     let lessonNumber = lessonIndex.toString();
-    this.changedSchedule[dayIndex].lesson.forEach(i => {
+    this.currentSchedule[dayIndex].lesson.forEach(i => {
       if(i.numberOfLesson === lessonNumber) {
         isLessonExist = true;
         i.nameOfLesson[columnIndex] = increased;
       }
     });
-
-    if(!isLessonExist) {
-      let newLesson = {
-        numberOfLesson : lessonNumber,
-        nameOfLesson: ["-/-", "-/-"],
-        time: time
-      };
-      newLesson.nameOfLesson[columnIndex] = increased;
-      this.changedSchedule[dayIndex].lesson.push(newLesson);
-      this.changedSchedule[dayIndex].lesson.sort((a,b) => (a.numberOfLesson > b.numberOfLesson) ? 1 : ((b.numberOfLesson > a.numberOfLesson) ? -1 : 0));
-    }
     this.print = true;
   }
 
@@ -62,7 +52,6 @@ export class ScheduleComponent implements OnInit {
           this.schedule = response.data;
           this.currentName = this.schedule.groupName;
           this.currentSchedule = this.schedule.days;
-          this.changedSchedule = JSON.parse(JSON.stringify(this.currentSchedule));
         }
       });
   };
@@ -79,18 +68,10 @@ export class ScheduleComponent implements OnInit {
       });
   };
 
-  getLessonNameByNumber(number, data, index): any{
-    let names, name;
-    names = data.filter(i => i.numberOfLesson == number);
-    if(names && names.length) name = names[0].nameOfLesson[index];
-    if(name === "" || name == 0 || !name) name = "empty";
-    return name
-  }
-
-  saveClick(): any{
+  saveClick(): void {
     let toUpdate = {
       groupName: this.currentName,
-      days: this.changedSchedule
+      days: this.currentSchedule
     };
     this.scheduleService.updateSchedule(toUpdate)
       .subscribe((response: APIResponse) => {
@@ -99,8 +80,9 @@ export class ScheduleComponent implements OnInit {
             this.updatingError = response.data;
             this.getScheduleByName(this.currentName);
           } else {
-            this.updated = response;
+            this.updated = response.data;
             this.getScheduleByName(this.updated.groupName);
+            this.isEdit = !this.isEdit;
           }
         }
       });
