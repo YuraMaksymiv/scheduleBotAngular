@@ -31,14 +31,12 @@ export class LoginComponent implements OnInit {
     this.userServise.loginUser(loginForm.username, loginForm.password)
       .subscribe((response: any) => {
         if(response) {
-          if(response.code !== 200) {
-            this.isError = true;
-            this.errorText = response.data;
-          } else if (response.code === 200) {
-            localStorage.setItem("token", response.token);
+            localStorage.setItem("token", response);
             this.router.navigate(['']);
-          }
         }
+      }, error => {
+        this.isError = true;
+        this.errorText = error.error
       })
   }
 

@@ -17,9 +17,9 @@ export class GroupsComponent implements OnInit {
 
   getGroups(): void {
     this.groupService.getAllGroups()
-      .subscribe((response: APIResponse) => {
-        if (response.code === 200) {
-          this.groups = response.data;
+      .subscribe((response: any) => {
+        if (response) {
+          this.groups = response;
         }
       });
   }

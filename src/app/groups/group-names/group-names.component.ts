@@ -40,9 +40,9 @@ export class GroupNamesComponent implements OnInit {
 
   getGroupsByName(groupName, section): void {
     this.groupService.getGroupsBySection(section)
-      .subscribe((response: APIResponse) => {
-        if (response.code === 200) {
-          this.groupsFromSection = response.data;
+      .subscribe((response: any) => {
+        if (response) {
+          this.groupsFromSection = response;
           this.groupsFromSection = this.groupsFromSection.groups;
           this.groupNames = this.groupsFromSection.filter(i => i.groupName === groupName)[0];
           this.groupNames = this.groupNames.groupList;

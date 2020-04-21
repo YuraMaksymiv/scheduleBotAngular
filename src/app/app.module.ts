@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -25,15 +25,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ScheduleItemComponent } from './schedule/schedule-item/schedule-item.component';
 import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
+import {TokenGuard} from './token.guard';
+import {GroupsService} from './services/groups.service';
+import {ParamInterceptor} from './api.interceptor';
 
 const routes: Routes = [
-  {path: '', component: MenuComponent},
+  {path: '', component: MenuComponent, canActivate: [TokenGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'sections', component: GroupsComponent},
-  {path: 'sections/:section', component: GroupListsComponent, pathMatch: 'full'},
-  {path: 'sections/:section/groups/:groupName', component: GroupNamesComponent, pathMatch: 'full'},
-  {path: 'sections/:section/groups/:groupName/course/:courseName', component: UsersForGroupComponent, pathMatch: 'full'},
-  {path: 'schedule', component: ScheduleComponent}
+  {path: 'sections', component: GroupsComponent, canActivate: [TokenGuard]},
+  {path: 'sections/:section', component: GroupListsComponent, pathMatch: 'full', canActivate: [TokenGuard]},
+  {path: 'sections/:section/groups/:groupName', component: GroupNamesComponent, pathMatch: 'full', canActivate: [TokenGuard]},
+  {path: 'sections/:section/groups/:groupName/course/:courseName', component: UsersForGroupComponent, pathMatch: 'full', canActivate: [TokenGuard]},
+  {path: 'schedule', component: ScheduleComponent, canActivate: [TokenGuard]}
 ];
 
 @NgModule({
@@ -65,7 +68,12 @@ const routes: Routes = [
     MatButtonModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [TokenGuard,
+    GroupsService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ParamInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

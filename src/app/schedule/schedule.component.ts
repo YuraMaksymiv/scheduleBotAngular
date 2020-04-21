@@ -47,9 +47,9 @@ export class ScheduleComponent implements OnInit {
 
   getScheduleByName(groupName): void {
     this.scheduleService.getSchedule(groupName)
-      .subscribe((response: APIResponse) => {
-        if (response.code === 200) {
-          this.schedule = response.data;
+      .subscribe((response: any) => {
+        if(response) {
+          this.schedule = response;
           this.currentName = this.schedule.groupName;
           this.currentSchedule = this.schedule.days;
         }
@@ -59,9 +59,9 @@ export class ScheduleComponent implements OnInit {
   getOtherGroupNames(section, mainGroup): void {
     let groups;
     this.groupsService.getGroupsBySection(section)
-      .subscribe((response: APIResponse) => {
-        if (response.code === 200) {
-          groups = response.data;
+      .subscribe((response: any) => {
+        if (response) {
+          groups = response;
           groups = groups.groups.filter(i => i.groupName === mainGroup)[0];
           this.groups = groups.groupList;
         }
@@ -74,16 +74,16 @@ export class ScheduleComponent implements OnInit {
       days: this.currentSchedule
     };
     this.scheduleService.updateSchedule(toUpdate)
-      .subscribe((response: APIResponse) => {
+      .subscribe((response: any) => {
         if (response) {
-          if(response.code !== 200) {
-            this.updatingError = response.data;
-            this.getScheduleByName(this.currentName);
-          } else {
-            this.updated = response.data;
+          // if(response.status !== 200) {
+          //   this.updatingError = response;
+          //   this.getScheduleByName(this.currentName);
+          // } else {
+            this.updated = response;
             this.getScheduleByName(this.updated.groupName);
             this.isEdit = !this.isEdit;
-          }
+          // }
         }
       });
   }

@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
       this.isLogged = true;
     } else {
       this.isLogged = false;
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
     }
   }
 

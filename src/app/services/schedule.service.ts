@@ -8,13 +8,14 @@ import {Hosts} from '../enums/hosts';
   providedIn: 'root'
 })
 export class ScheduleService {
+  token = localStorage.getItem('token');
 
   constructor(private http: HttpClient) {}
   public getSchedule(name): Observable<APIResponse> {
-    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/schedule?name=${name}`);
+    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/schedule?name=${name}`, {headers: {token: this.token}});
   }
 
   public updateSchedule(schedule): Observable<APIResponse> {
-    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/schedule`, {schedule: schedule});
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/schedule`, {schedule: schedule}, {headers: {token: this.token}});
   }
 }
