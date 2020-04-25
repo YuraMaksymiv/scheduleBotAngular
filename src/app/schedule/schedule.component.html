@@ -10,6 +10,7 @@
 
   <div style="float: right">
     <button *ngIf="isEdit" mat-raised-button class="header_item" (click)="saveClick()">Зберегти</button>
+    <button *ngIf="!isEdit" mat-raised-button class="header_item" (click)="saveClick()">Редагувати</button>
     <p *ngIf="updatingError" style="color: red">{{updatingError}}</p>
   </div>
 
