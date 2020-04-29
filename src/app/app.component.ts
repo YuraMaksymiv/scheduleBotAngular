@@ -52,6 +52,9 @@ export class AppComponent implements OnInit {
       } else {
         this.isLogged = false;
       }
+      if(this.router.url === '/') {
+        this.inMenu = true;
+      }
     })
   }
 

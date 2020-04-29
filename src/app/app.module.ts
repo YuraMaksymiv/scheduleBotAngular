@@ -11,7 +11,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
   MatSelectModule,
   MatTableModule
 } from '@angular/material';
@@ -28,10 +28,12 @@ import { MenuComponent } from './menu/menu.component';
 import {TokenGuard} from './token.guard';
 import {GroupsService} from './services/groups.service';
 import {ParamInterceptor} from './api.interceptor';
+import {LoginGuard} from './login.guard';
+import {ScheduleService} from './services/schedule.service';
 
 const routes: Routes = [
   {path: '', component: MenuComponent, canActivate: [TokenGuard]},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
   {path: 'sections', component: GroupsComponent, canActivate: [TokenGuard]},
   {path: 'sections/:section', component: GroupListsComponent, pathMatch: 'full', canActivate: [TokenGuard]},
   {path: 'sections/:section/groups/:groupName', component: GroupNamesComponent, pathMatch: 'full', canActivate: [TokenGuard]},
@@ -66,10 +68,18 @@ const routes: Routes = [
     MatIconModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [TokenGuard,
+    LoginGuard,
     GroupsService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ParamInterceptor,
+      multi: true
+    },
+    ScheduleService, {
       provide: HTTP_INTERCEPTORS,
       useClass: ParamInterceptor,
       multi: true

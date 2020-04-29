@@ -29,6 +29,7 @@ export class ScheduleComponent implements OnInit {
   updatingError: any;
   params: any;
   isEdit = false;
+  isTableReady = false;
 
 
   onChanged(increased, lessonIndex, dayIndex, columnIndex){
@@ -52,6 +53,7 @@ export class ScheduleComponent implements OnInit {
           this.schedule = response;
           this.currentName = this.schedule.groupName;
           this.currentSchedule = this.schedule.days;
+          this.isTableReady = true;
         }
       });
   };

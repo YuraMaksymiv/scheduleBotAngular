@@ -91,6 +91,11 @@ table {
   font-weight: bold;
 }
 
+.login_spinner {
+  width: 5%;
+  //margin: 0 auto;
+}
+
 .page_content {
   max-width: 90%;
   min-height: 100%;
@@ -183,6 +188,10 @@ table {
   outline: none;
   cursor: pointer;
   text-align: center;
+}
+
+.table_spinner {
+  margin-top: 60px;
 }
 
 //menu
