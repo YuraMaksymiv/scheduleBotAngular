@@ -30,15 +30,17 @@ import {GroupsService} from './services/groups.service';
 import {ParamInterceptor} from './api.interceptor';
 import {LoginGuard} from './login.guard';
 import {ScheduleService} from './services/schedule.service';
+import { ImportComponent } from './import/import.component';
 
 const routes: Routes = [
   {path: '', component: MenuComponent, canActivate: [TokenGuard]},
-  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
+  {path: 'login', component: LoginComponent},
   {path: 'sections', component: GroupsComponent, canActivate: [TokenGuard]},
   {path: 'sections/:section', component: GroupListsComponent, pathMatch: 'full', canActivate: [TokenGuard]},
   {path: 'sections/:section/groups/:groupName', component: GroupNamesComponent, pathMatch: 'full', canActivate: [TokenGuard]},
   {path: 'sections/:section/groups/:groupName/course/:courseName', component: UsersForGroupComponent, pathMatch: 'full', canActivate: [TokenGuard]},
-  {path: 'schedule', component: ScheduleComponent, canActivate: [TokenGuard]}
+  {path: 'schedule', component: ScheduleComponent, canActivate: [TokenGuard]},
+  {path: 'import', component: ImportComponent, canActivate: [TokenGuard]}
 ];
 
 @NgModule({
@@ -51,7 +53,8 @@ const routes: Routes = [
     ScheduleComponent,
     ScheduleItemComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    ImportComponent
   ],
   imports: [
     BrowserModule,

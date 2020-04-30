@@ -1,0 +1,17 @@
+<div class="menu">
+  <mat-card class="menu-item" (click)="groupsClick()"><p class="menu-text">Завантажити назви груп</p></mat-card>
+  <mat-card class="menu-item" (click)="scheduleClick()"><p class="menu-text">Завантажити розклад</p></mat-card>
+</div>
+
+<div *ngIf="isClicked" class="menu">
+  <p *ngIf="type === 'groups'">Завантажити назви груп</p>
+  <p *ngIf="type === 'schedule'">Завантажити розклад</p>
+  <input
+    style="display: none"
+    type="file" (change)="onFileChanged($event)"
+    #fileInput>
+  <button (click)="fileInput.click()">Вибрати файл</button>
+  <button (click)="onUpload(type)">Завантажити</button>
+
+  <p *ngIf="isDone">Завантажено успішно</p>
+</div>

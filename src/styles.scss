@@ -152,8 +152,8 @@ table {
 /*new table*/
 .schedule_table {
   width: 100%;
-  background-color: #90d7a4;
-  color: #177a33;
+  background-color: white;
+  color: #474747;
   font-weight: bold;
   font-size: 16px;
 }
@@ -165,14 +165,21 @@ table {
 }
 
 .table_day_row {
-  max-width: 20%;
-  border-top: 3px solid #177a33;
+  width: 9%;
+  border-top: 3px solid #b2b2b2;
+  text-align: center;
+}
+
+.table_time_row {
+  width: 8%;
+  border-top: 3px solid #b2b2b2;
+  border-left: 3px solid #b2b2b2;
   text-align: center;
 }
 
 .table_row {
-  border-top: 3px solid #177a33;
-  border-left: 3px solid #177a33;
+  border-top: 3px solid #b2b2b2;
+  border-left: 3px solid #b2b2b2;
   margin: 5px auto;
   text-align: center;
   padding: 8px;
@@ -180,8 +187,8 @@ table {
 
 .item_input {
   width: 100%;
-  background-color: #90d7a4;
-  color: #177a33;
+  background-color: white;
+  color: #474747;
   font-weight: bold;
   font-size: 16px;
   border: none;
