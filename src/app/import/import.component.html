@@ -3,15 +3,22 @@
   <mat-card class="menu-item" (click)="scheduleClick()"><p class="menu-text">Завантажити розклад</p></mat-card>
 </div>
 
-<div *ngIf="isClicked" class="menu">
-  <p *ngIf="type === 'groups'">Завантажити назви груп</p>
-  <p *ngIf="type === 'schedule'">Завантажити розклад</p>
-  <input
-    style="display: none"
-    type="file" (change)="onFileChanged($event)"
-    #fileInput>
-  <button (click)="fileInput.click()">Вибрати файл</button>
-  <button (click)="onUpload(type)">Завантажити</button>
+<form *ngIf="isClicked" [formGroup]="importForm" (ngSubmit)="onUpload(type, importForm.value)" class="import_content">
+  <p *ngIf="type === 'groups'" class="import_title">Завантажити назви груп</p>
+  <p *ngIf="type === 'schedule'" class="import_title">Завантажити розклад</p>
+  <div class="import_section_item">
+    <label>Введіть назву інституту:</label>
+    <input type="text" formControlName="section" required="">
+  </div>
+  <div class="import_file_item">
+    <input
+      style="display: none"
+      type="file" (change)="onFileChanged($event)"
+      #fileInput>
+    <button (click)="fileInput.click()">Вибрати файл</button>
+  </div>
+
+  <button type="submit">Завантажити</button>
 
   <p *ngIf="isDone">Завантажено успішно</p>
-</div>
+</form>

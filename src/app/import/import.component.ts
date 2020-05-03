@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ImportService} from '../services/import.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-import',
@@ -8,9 +9,15 @@ import {ImportService} from '../services/import.service';
 })
 export class ImportComponent implements OnInit {
 
+  importForm: FormGroup
+
   constructor(
     private importService: ImportService
-  ) { }
+  ) {
+    this.importForm = new FormGroup({
+      "section": new FormControl("", Validators.required)
+    });
+  }
 
   selectedFile: File
   type: string
@@ -33,9 +40,9 @@ export class ImportComponent implements OnInit {
     this.selectedFile = event.target.files[0]
   }
 
-  onUpload(type) {
+  onUpload(type, importForm) {
     if(type === "groups") {
-      this.importService.importGroups(this.selectedFile)
+      this.importService.importGroups(this.selectedFile, importForm.section)
         .subscribe((response: any) => {
           if(response) {
             this.isDone = true

@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
       }
       if(this.router.url === '/') {
         this.inMenu = true;
-      }
+      } else this.inMenu = false
     })
   }
 

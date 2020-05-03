@@ -1,8 +1,8 @@
 <div class="page_content">
   <div *ngIf="isLogged" class="page_header">
     <div class="header_content">
-      <button *ngIf="!inMenu" mat-raised-button class="header_item" (click)="backClick()">Назад</button>
-      <button mat-raised-button class="header_item" (click)="logoutClick()">Вихід</button>
+      <button *ngIf="!inMenu" mat-raised-button class="header_item header_back_button" (click)="backClick()">Назад</button>
+      <button mat-raised-button class="header_item header_logout_button" (click)="logoutClick()">Вихід</button>
     </div>
   </div>
   <router-outlet></router-outlet>
