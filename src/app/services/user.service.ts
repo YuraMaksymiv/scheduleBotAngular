@@ -8,13 +8,19 @@ import {Hosts} from '../enums/hosts';
   providedIn: 'root',
 })
 export class UserService {
+  token = localStorage.getItem('token');
 
   constructor(private http: HttpClient) {}
+
   public loginUser(username, password): Observable<any> {
     return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user/login`, {username: username, password: password});
   }
 
   public registerUser(username, password): Observable<any> {
     return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user/register`, {username: username, password: password});
+  }
+
+  public getUsers(filter): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user`, {filter}, {headers: {token: this.token}});
   }
 }

@@ -24,6 +24,10 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/notifications']);
   }
 
+  usersClick() : void {
+    this.router.navigate(['/users']);
+  }
+
   aboutClick() : void {
     this.router.navigate(['/about']);
   }
