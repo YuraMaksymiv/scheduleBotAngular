@@ -1,0 +1,44 @@
+<input type="text" #searchInput (input)="searchUser(searchInput.value)">
+
+<div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 users_table">
+
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef> Телеграм ІД </th>
+      <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Ім'я телеграм </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Ім'я </th>
+      <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="section">
+      <th mat-header-cell *matHeaderCellDef> Інститут </th>
+      <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="groupsName">
+      <th mat-header-cell *matHeaderCellDef> Група </th>
+      <td mat-cell *matCellDef="let element"> {{element.groupsName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userType">
+      <th mat-header-cell *matHeaderCellDef> Тип користувача </th>
+      <td mat-cell *matCellDef="let element"> {{element.userType}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef> Створено </th>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

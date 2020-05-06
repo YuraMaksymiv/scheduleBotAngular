@@ -20,7 +20,7 @@ export class UserService {
     return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user/register`, {username: username, password: password});
   }
 
-  public getUsers(filter): Observable<any> {
-    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user`, {filter}, {headers: {token: this.token}});
+  public getUsers(data): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user`, {search: data.search ? data.search : "", sort: data.sort ? data.sort : {}, filter: data.filter ? data.filter : {}}, {headers: {token: this.token}});
   }
 }
