@@ -7,7 +7,6 @@ export class TokenGuard implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> | boolean{
 
     let token = localStorage.getItem('token')
-
     if(token) {
       return true;
     } else {

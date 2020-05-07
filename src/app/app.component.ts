@@ -5,6 +5,7 @@ import {NavigationEnd, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Observable} from 'rxjs';
 import {filter} from 'rxjs/operators';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import {filter} from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   constructor(
+    private authService: AuthService,
     private router: Router,
     private _location: Location,
 
@@ -27,20 +29,12 @@ export class AppComponent implements OnInit {
   isLogged: boolean;
   inMenu = false;
 
-  // checkLogin() {
-  //   if(localStorage.getItem("token")) {
-  //     this.isLogged = true;
-  //   } else {
-  //     this.isLogged = false;
-  //   }
-  // }
-
   backClick(): void {
     this._location.back();
   }
 
   logoutClick(): void {
-    localStorage.removeItem('token');
+    this.authService.logoutUser();
     this.isLogged = false;
     this.router.navigate(['/login']);
   }

@@ -10,7 +10,7 @@
 
   <div style="float: right">
     <button *ngIf="isEdit" mat-raised-button class="header_item" (click)="saveClick()">Зберегти</button>
-    <button *ngIf="!isEdit" mat-raised-button class="header_item" (click)="saveClick()">Редагувати</button>
+    <button *ngIf="!isEdit" mat-raised-button class="header_item" (click)="editClick()">Редагувати</button>
     <p *ngIf="updatingError" style="color: red">{{updatingError}}</p>
   </div>
 
@@ -32,10 +32,12 @@
       <td *ngIf="isFirst" [attr.rowspan]="day.lesson.length" class="table_day_row">{{day.day}}</td>
       <td class="table_time_row">{{times[i]}}</td>
       <td class="table_row">
-        <app-schedule-item [inputItem] ="cell.nameOfLesson[0]" (onChanged)="onChanged($event, i, dayIndex, 0)"></app-schedule-item>
+        <p *ngIf="!isEdit" >{{cell.nameOfLesson[0]}}</p>
+        <app-schedule-item *ngIf="isEdit" [inputItem] ="cell.nameOfLesson[0]" (onChanged)="onChanged($event, i, dayIndex, 0)"></app-schedule-item>
       </td>
       <td class="table_row">
-        <app-schedule-item [inputItem] ="cell.nameOfLesson[1]" (onChanged)="onChanged($event, i, dayIndex, 1)"></app-schedule-item>
+        <p *ngIf="!isEdit">{{cell.nameOfLesson[1]}}</p>
+        <app-schedule-item *ngIf="isEdit" [inputItem] ="cell.nameOfLesson[1]" (onChanged)="onChanged($event, i, dayIndex, 1)"></app-schedule-item>
       </td>
     </tr>
     </tbody>

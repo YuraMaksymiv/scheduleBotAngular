@@ -1,15 +1,18 @@
-<input type="text" #searchInput (input)="searchUser(searchInput.value)">
+ <div class="users_table_header">
+   <mat-paginator style="max-width: 40%; float: right">
+   </mat-paginator>
+ </div>
 
 <div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 users_table">
+  <table mat-table matSort [dataSource]="dataSource" class="mat-elevation-z8 users_table">
 
     <ng-container matColumnDef="userId">
-      <th mat-header-cell *matHeaderCellDef> Телеграм ІД </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Телеграм ІД </th>
       <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
     </ng-container>
 
     <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef> Ім'я телеграм </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Ім'я телеграм </th>
       <td mat-cell *matCellDef="let element"> {{element.username}} </td>
     </ng-container>
 
@@ -35,7 +38,7 @@
 
     <ng-container matColumnDef="createdAt">
       <th mat-header-cell *matHeaderCellDef> Створено </th>
-      <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd.MM.y'}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

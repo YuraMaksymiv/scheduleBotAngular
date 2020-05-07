@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../services/user.service';
+import {MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-users',
@@ -12,29 +13,23 @@ export class UsersComponent implements OnInit {
     private userService: UserService
   ) { }
 
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   displayedColumns: string[] = ['userId', 'username', 'name', 'section', 'groupsName', 'userType', 'createdAt'];
-  dataSource: string[];
+  dataSource = new MatTableDataSource();
 
   getUsers(): void {
     this.userService.getUsers({})
       .subscribe((response: any) => {
         if(response) {
-          this.dataSource = response.users
-        }
-      })
-  }
-
-  searchUser(searchValue): void {
-    this.userService.getUsers({search: searchValue})
-      .subscribe((response: any) => {
-        if(response) {
-          this.dataSource = response.users
+          this.dataSource.data = response.users
         }
       })
   }
 
   ngOnInit() {
-    this.getUsers()
+    this.getUsers();
+    this.dataSource.sort = this.sort;
   }
 
 }

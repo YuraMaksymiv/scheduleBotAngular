@@ -33,7 +33,6 @@ export class ScheduleComponent implements OnInit {
 
 
   onChanged(increased, lessonIndex, dayIndex, columnIndex){
-    this.isEdit = !this.isEdit;
     lessonIndex++;
     let isLessonExist = false;
     let lessonNumber = lessonIndex.toString();
@@ -47,13 +46,18 @@ export class ScheduleComponent implements OnInit {
   }
 
   getScheduleByName(groupName): void {
+    const startTime = new Date().getTime();
     this.scheduleService.getSchedule(groupName)
       .subscribe((response: any) => {
         if(response) {
+          const endTime = new Date().getTime();
+          const delay = (endTime - startTime < 2000) ? 2000-(endTime - startTime) : 0;
           this.schedule = response;
           this.currentName = this.schedule.groupName;
           this.currentSchedule = this.schedule.days;
-          this.isTableReady = true;
+          setTimeout(() => {
+            this.isTableReady = true;
+          }, delay);
         }
       });
   };
@@ -70,6 +74,10 @@ export class ScheduleComponent implements OnInit {
       });
   };
 
+  editClick(): void {
+    this.isEdit = !this.isEdit;
+  }
+
   saveClick(): void {
     let toUpdate = {
       groupName: this.currentName,
@@ -78,14 +86,9 @@ export class ScheduleComponent implements OnInit {
     this.scheduleService.updateSchedule(toUpdate)
       .subscribe((response: any) => {
         if (response) {
-          // if(response.status !== 200) {
-          //   this.updatingError = response;
-          //   this.getScheduleByName(this.currentName);
-          // } else {
-            this.updated = response;
-            this.getScheduleByName(this.updated.groupName);
-            this.isEdit = !this.isEdit;
-          // }
+          this.updated = response;
+          this.getScheduleByName(this.updated.groupName);
+          this.isEdit = !this.isEdit;
         }
       });
   }

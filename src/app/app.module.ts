@@ -12,37 +12,40 @@ import {
   MatInputModule,
   MatListModule,
   MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
-  MatSelectModule,
+  MatSelectModule, MatSortModule,
   MatTableModule
 } from '@angular/material';
 import {MatCardModule} from '@angular/material';
-import { GroupListsComponent } from './groups/group-lists/group-lists.component';
-import { GroupNamesComponent } from './groups/group-names/group-names.component';
-import { UsersForGroupComponent } from './groups/users-for-group/users-for-group.component';
+import {GroupListsComponent} from './groups/group-lists/group-lists.component';
+import {GroupNamesComponent} from './groups/group-names/group-names.component';
+import {UsersForGroupComponent} from './groups/users-for-group/users-for-group.component';
 import {MatRippleModule} from '@angular/material';
-import { ScheduleComponent } from './schedule/schedule.component';
+import {ScheduleComponent} from './schedule/schedule.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { ScheduleItemComponent } from './schedule/schedule-item/schedule-item.component';
-import { LoginComponent } from './login/login.component';
-import { MenuComponent } from './menu/menu.component';
-import {TokenGuard} from './token.guard';
+import {ScheduleItemComponent} from './schedule/schedule-item/schedule-item.component';
+import {LoginComponent} from './login/login.component';
+import {MenuComponent} from './menu/menu.component';
+import {TokenGuard} from './guards/token.guard';
 import {GroupsService} from './services/groups.service';
 import {ParamInterceptor} from './api.interceptor';
-import {LoginGuard} from './login.guard';
+import {LoginGuard} from './guards/login.guard';
 import {ScheduleService} from './services/schedule.service';
-import { ImportComponent } from './import/import.component';
-import { UsersComponent } from './users/users.component';
+import {ImportComponent} from './import/import.component';
+import {UsersComponent} from './users/users.component';
+import {AboutComponent} from './about/about.component';
+import {UserService} from './services/user.service';
 
 const routes: Routes = [
   {path: '', component: MenuComponent, canActivate: [TokenGuard]},
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
   {path: 'sections', component: GroupsComponent, canActivate: [TokenGuard]},
   {path: 'sections/:section', component: GroupListsComponent, pathMatch: 'full', canActivate: [TokenGuard]},
   {path: 'sections/:section/groups/:groupName', component: GroupNamesComponent, pathMatch: 'full', canActivate: [TokenGuard]},
   {path: 'sections/:section/groups/:groupName/course/:courseName', component: UsersForGroupComponent, pathMatch: 'full', canActivate: [TokenGuard]},
   {path: 'schedule', component: ScheduleComponent, canActivate: [TokenGuard]},
   {path: 'import', component: ImportComponent, canActivate: [TokenGuard]},
-  {path: 'users', component: UsersComponent, canActivate: [TokenGuard]}
+  {path: 'users', component: UsersComponent, canActivate: [TokenGuard]},
+  {path: 'about', component: AboutComponent, canActivate: [TokenGuard]}
 ];
 
 @NgModule({
@@ -57,7 +60,8 @@ const routes: Routes = [
     LoginComponent,
     MenuComponent,
     ImportComponent,
-    UsersComponent
+    UsersComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +80,8 @@ const routes: Routes = [
     MatButtonModule,
     MatInputModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   providers: [TokenGuard,
     LoginGuard,
@@ -86,6 +91,11 @@ const routes: Routes = [
       multi: true
     },
     ScheduleService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ParamInterceptor,
+      multi: true
+    },
+    UserService, {
       provide: HTTP_INTERCEPTORS,
       useClass: ParamInterceptor,
       multi: true
