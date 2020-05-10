@@ -13,6 +13,10 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   public getUsers(data): Observable<any> {
-    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user`, data, {headers: {token: this.token}});
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user`, data, {headers: {token: localStorage.getItem('token')}});
+  }
+
+  public changeType(userId, type): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/user/type/${userId}/${type}`, {}, {headers: {token: localStorage.getItem('token')}});
   }
 }

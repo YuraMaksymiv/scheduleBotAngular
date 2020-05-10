@@ -15,7 +15,7 @@ export class ImportService {
   public importSchedule(file, section): Observable<APIResponse> {
     const uploadData = new FormData();
     uploadData.append('file', file, file.name);
-    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/import/schedule`, uploadData, {headers: {token: this.token}, params: {section: section}});
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/import/schedule`, uploadData, {headers: {token: localStorage.getItem('token')}, params: {section: section}});
   }
 
 }

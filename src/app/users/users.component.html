@@ -54,10 +54,10 @@
 <!--          <mat-icon> more_vert </mat-icon>-->
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button *ngIf="!element.userType && element.groupsName" (click)="changeUserType(element.userId)" mat-menu-item>
             <span>Призначити старостою</span>
           </button>
-          <button mat-menu-item>
+          <button (click)="sendNotification(element.userId)" mat-menu-item>
             <span>Надіслати сповіщення</span>
           </button>
         </mat-menu>

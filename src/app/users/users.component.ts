@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../services/user.service';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {NotificationsService} from '../services/notifications.service';
 
 @Component({
   selector: 'app-users',
@@ -10,7 +11,8 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 export class UsersComponent implements OnInit {
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private notificationsService: NotificationsService
   ) { }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -31,6 +33,30 @@ export class UsersComponent implements OnInit {
           this.dataSource.data = response.users
         }
       })
+  }
+
+  changeUserType(userId): void {
+    let isRight = confirm('Ви впевнені, що хочете призначити користувача старостою?');
+    if(isRight) {
+      this.userService.changeType(userId, "monitor")
+        .subscribe((response: any) => {
+          if(response) {
+            this.getUsers();
+          }
+        })
+    }
+  }
+  
+  sendNotification(userId): void {
+    let text = prompt('Введіть повідомлення');
+    if(text) {
+      this.notificationsService.sendToUser(userId, text)
+        .subscribe((response: any) => {
+          if(response) {
+            console.log("Done");
+          }
+        })
+    }
   }
 
   ngOnInit() {

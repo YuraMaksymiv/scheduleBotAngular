@@ -28,7 +28,14 @@ export class ScheduleItemComponent implements OnInit {
     this.isItemFocused = !this.isItemFocused;
   }
 
+  checkLessonType(lesson): void {
+    if(lesson.isCloned) {
+      (document.querySelector('.item_output') as HTMLElement).style.background = "#ffcccc";
+    }
+  }
+
   ngOnInit() {
+    this.checkLessonType(this.inputItem)
   }
 
 }

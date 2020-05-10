@@ -203,7 +203,7 @@ table {
 
 .item_input {
   width: 100%;
-  background-color: #e5e5e5;
+  background-color: #e8f7ec;
   color: #474747;
   //font-weight: bold;
   font-size: 16px;
@@ -214,7 +214,7 @@ table {
 }
 
 .item_output {
-  background-color: #e5e5e5;
+  background-color: #e8f7ec;
 }
 
 .table_spinner {
@@ -311,5 +311,49 @@ import_progress {
   background-color: white;
   box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.1), 0px 8px 10px 1px rgba(0, 0, 0, 0.12), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 
+}
+
+//notification
+.notification_header {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 80px auto;
+  padding: 40px;
+  max-width: 80%;
+  background-color: #90d7a4;
+}
+
+.notification_header_item {
+  flex-basis: 20%;
+  margin: 20px auto;
+  max-width: 80%;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.notification_header_item_text {
+  text-align: center;
+}
+
+.notification_text {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 80px auto;
+  padding: 40px;
+  max-width: 80%;
+  background-color: #90d7a4;
+}
+
+.notification_text_input {
+  width: 90%;
+}
+
+.notification_send_button {
+  max-width: 40%;
+  margin: 0 auto;
 }
 
