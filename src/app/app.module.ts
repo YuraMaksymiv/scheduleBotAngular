@@ -2,13 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-
+import {MatIconModule} from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { GroupsComponent } from './groups/groups.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule,
-  MatIconModule,
+  MatButtonModule, MatExpansionModule,
   MatInputModule,
   MatListModule,
   MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
@@ -34,6 +33,9 @@ import {ImportComponent} from './import/import.component';
 import {UsersComponent} from './users/users.component';
 import {AboutComponent} from './about/about.component';
 import {UserService} from './services/user.service';
+import {MatMenuModule} from '@angular/material/typings/esm5/menu';
+import { NotificationComponent } from './notification/notification.component';
+
 
 const routes: Routes = [
   {path: '', component: MenuComponent, canActivate: [TokenGuard]},
@@ -45,6 +47,7 @@ const routes: Routes = [
   {path: 'schedule', component: ScheduleComponent, canActivate: [TokenGuard]},
   {path: 'import', component: ImportComponent, canActivate: [TokenGuard]},
   {path: 'users', component: UsersComponent, canActivate: [TokenGuard]},
+  {path: 'notifications', component: NotificationComponent, canActivate: [TokenGuard]},
   {path: 'about', component: AboutComponent, canActivate: [TokenGuard]}
 ];
 
@@ -61,7 +64,8 @@ const routes: Routes = [
     MenuComponent,
     ImportComponent,
     UsersComponent,
-    AboutComponent
+    AboutComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +85,9 @@ const routes: Routes = [
     MatInputModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatMenuModule,
+    MatExpansionModule
   ],
   providers: [TokenGuard,
     LoginGuard,

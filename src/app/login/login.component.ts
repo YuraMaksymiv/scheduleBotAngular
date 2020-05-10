@@ -25,16 +25,19 @@ export class LoginComponent implements OnInit {
   }
 
   isError: boolean = false;
+  loginClick: boolean;
   errorText: string;
 
   login(loginForm) {
+    localStorage.removeItem('token');
+    this.loginClick = true;
     this.isError = false;
     this.authService.loginUser(loginForm.username, loginForm.password)
       .subscribe((response: any) => {
         if(response) {
             localStorage.setItem("token", response);
             this.router.navigate(['']);
-
+            this.loginClick = false;
         }
       }, error => {
         this.isError = true;

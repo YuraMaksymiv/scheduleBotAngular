@@ -15,7 +15,7 @@
     </mat-form-field>
 
     <p *ngIf="isError" class="error_message">{{errorText}}</p>
-    <div class="login_spinner">
+    <div *ngIf="loginClick" class="login_spinner">
       <mat-spinner diameter="40" ></mat-spinner>
     </div>
 

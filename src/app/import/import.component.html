@@ -1,24 +1,30 @@
-<div class="menu">
-  <mat-card class="menu-item" (click)="groupsClick()"><p class="menu-text">Завантажити назви груп</p></mat-card>
-  <mat-card class="menu-item" (click)="scheduleClick()"><p class="menu-text">Завантажити розклад</p></mat-card>
-</div>
-
-<form *ngIf="isClicked" [formGroup]="importForm" (ngSubmit)="onUpload(type, importForm.value)" class="import_content">
-  <p *ngIf="type === 'groups'" class="import_title">Завантажити назви груп</p>
-  <p *ngIf="type === 'schedule'" class="import_title">Завантажити розклад</p>
+<div class="import_content">
   <div class="import_section_item">
-    <label>Введіть назву інституту:</label>
-    <input type="text" formControlName="section" required="">
+    <mat-form-field>
+      <mat-label>Виберіть інститут</mat-label>
+      <mat-select [(ngModel)]="currentSection" (ngModelChange)="sectionClick()">
+        <mat-option *ngFor="let section of sections" [value]="section">
+          {{section}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  <div class="import_file_item">
+
+  <div *ngIf="isClicked" class="import_file_item">
     <input
       style="display: none"
       type="file" (change)="onFileChanged($event)"
       #fileInput>
-    <button (click)="fileInput.click()">Вибрати файл</button>
+    <button class="import_button" mat-raised-button (click)="fileInput.click()">Вибрати файл</button>
   </div>
 
-  <button type="submit">Завантажити</button>
+  <button class="import_button" mat-raised-button *ngIf="isFileSelect" (click)="onUpload()">Завантажити</button>
 
   <p *ngIf="isDone">Завантажено успішно</p>
-</form>
+  <p *ngIf="isError">Помилка завантаження</p>
+  <div *ngIf="!isImported" class="import_progress">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+</div>
+

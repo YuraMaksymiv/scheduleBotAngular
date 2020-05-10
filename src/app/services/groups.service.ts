@@ -12,14 +12,14 @@ export class GroupsService {
 
   constructor(private http: HttpClient) {}
   public getAllGroups(): Observable<APIResponse> {
-    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups`, {headers: {token: this.token}});
+    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups`, {headers: {token: localStorage.getItem('token')}});
   }
 
   public getGroupsBySection(section): Observable<APIResponse> {
-    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups/groupsListBySection/${section}`, {headers: {token: this.token}});
+    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups/groupsListBySection/${section}`, {headers: {token: localStorage.getItem('token')}});
   }
 
   public getUsersForGroup(groupName): Observable<APIResponse> {
-    return this.http.post<APIResponse>((`${Hosts.API_HOST}/api/user/getUsersForGroup`), {group: groupName}, {headers: {token: this.token}});
+    return this.http.post<APIResponse>((`${Hosts.API_HOST}/api/user/getUsersForGroup`), {group: groupName}, {headers: {token: localStorage.getItem('token')}});
   }
 }

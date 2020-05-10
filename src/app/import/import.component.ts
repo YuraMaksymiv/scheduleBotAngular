@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ImportService} from '../services/import.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-import',
@@ -9,53 +8,47 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class ImportComponent implements OnInit {
 
-  importForm: FormGroup
 
   constructor(
-    private importService: ImportService
-  ) {
-    this.importForm = new FormGroup({
-      "section": new FormControl("", Validators.required)
-    });
+    private importService: ImportService) {
   }
 
-  selectedFile: File
-  type: string
-  isClicked = false
-  isDone = false
+  selectedFile: File;
+  isClicked = false;
+  isDone = false;
+  isError = false;
+  isImported = true;
+  isFileSelect = false;
+  sections = ["ІДКТД", "ІЕЕМ", "ІМАКІТ", "ІЛСПГ"];
+  currentSection: string;
 
-  groupsClick(): void {
+  sectionClick(): void {
     this.isClicked = true;
-    this.type = "groups";
     this.isDone = false;
-  }
-
-  scheduleClick(): void {
-    this.isClicked = true;
-    this.type = "schedule";
-    this.isDone = false;
+    this.isError = false;
+    this.isFileSelect = false;
   }
 
   onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
+    this.selectedFile = event.target.files[0];
+    this.isFileSelect = true;
+    this.isError = false;
   }
 
-  onUpload(type, importForm) {
-    if(type === "groups") {
-      this.importService.importGroups(this.selectedFile, importForm.section)
+  onUpload() {
+    this.isImported = false;
+    this.isError = false;
+      this.importService.importSchedule(this.selectedFile, this.currentSection)
         .subscribe((response: any) => {
           if(response) {
             this.isDone = true
+            this.isFileSelect = false;
+            this.isImported = true;
           }
+        }, error => {
+          this.isImported = true;
+          this.isError = true;
         })
-    } else if (type === "schedule") {
-      this.importService.importSchedule(this.selectedFile)
-        .subscribe((response: any) => {
-          if(response) {
-            this.isDone = true
-          }
-        })
-    }
   }
 
   ngOnInit() {

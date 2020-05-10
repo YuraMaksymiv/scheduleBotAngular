@@ -1,8 +1,8 @@
 <div>
   <p class="item_output card" *ngIf="!isItemFocused" (click)="changeFocus()">
-    {{inputItem}}
+    {{inputItem.lessonName}}
   </p>
   <p *ngIf="isItemFocused" >
-    <input class="item_input" type="text" #f  value="{{inputItem}}" (blur)="changeEvent(f.value)" (keyup.enter)="changeEvent(f.value)">
+    <input class="item_input" type="text" #f  value="{{inputItem.lessonName}}" (blur)="changeEvent(f.value)" (keyup.enter)="changeEvent(f.value)">
   </p>
 </div>

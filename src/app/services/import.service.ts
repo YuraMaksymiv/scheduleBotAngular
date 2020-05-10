@@ -11,16 +11,11 @@ export class ImportService {
   token = localStorage.getItem('token');
 
   constructor(private http: HttpClient) {}
-  public importGroups(file, section): Observable<APIResponse> {
-    const uploadData = new FormData();
-    uploadData.append('file', file, file.name);
-    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/import/groupsList`, uploadData,{headers: {token: this.token}, params: {section: section}});
-  }
 
-  public importSchedule(file): Observable<APIResponse> {
+  public importSchedule(file, section): Observable<APIResponse> {
     const uploadData = new FormData();
     uploadData.append('file', file, file.name);
-    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/import/schedule`, uploadData, {headers: {token: this.token}});
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/import/schedule`, uploadData, {headers: {token: this.token}, params: {section: section}});
   }
 
 }

@@ -32,11 +32,11 @@
       <td *ngIf="isFirst" [attr.rowspan]="day.lesson.length" class="table_day_row">{{day.day}}</td>
       <td class="table_time_row">{{times[i]}}</td>
       <td class="table_row">
-        <p *ngIf="!isEdit" >{{cell.nameOfLesson[0]}}</p>
+        <p *ngIf="!isEdit" >{{cell.nameOfLesson[0].lessonName}}</p>
         <app-schedule-item *ngIf="isEdit" [inputItem] ="cell.nameOfLesson[0]" (onChanged)="onChanged($event, i, dayIndex, 0)"></app-schedule-item>
       </td>
       <td class="table_row">
-        <p *ngIf="!isEdit">{{cell.nameOfLesson[1]}}</p>
+        <p *ngIf="!isEdit">{{cell.nameOfLesson[1].lessonName}}</p>
         <app-schedule-item *ngIf="isEdit" [inputItem] ="cell.nameOfLesson[1]" (onChanged)="onChanged($event, i, dayIndex, 1)"></app-schedule-item>
       </td>
     </tr>
