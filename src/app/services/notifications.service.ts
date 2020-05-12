@@ -16,4 +16,20 @@ export class NotificationsService {
     return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/notification/${userId}`, {notification: text}, {headers: {token: localStorage.getItem('token')}});
   }
 
+  public sendToAll(text): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/notification/all`, {notification: text}, {headers: {token: localStorage.getItem('token')}});
+  }
+
+  public sendToSection(section, text): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/notification/section`, {notification: text, section: section}, {headers: {token: localStorage.getItem('token')}});
+  }
+
+  public sendToGroup(group, text): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/notification`, {notification: text, group: group}, {headers: {token: localStorage.getItem('token')}});
+  }
+
+  public sendToMonitors(section, text): Observable<any> {
+    return this.http.post<APIResponse>(`${Hosts.API_HOST}/api/notification/monitors`, {notification: text, section: section}, {headers: {token: localStorage.getItem('token')}});
+  }
+
 }

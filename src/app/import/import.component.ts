@@ -29,13 +29,13 @@ export class ImportComponent implements OnInit {
     this.isFileSelect = false;
   }
 
-  onFileChanged(event) {
+  onFileChanged(event): void {
     this.selectedFile = event.target.files[0];
     this.isFileSelect = true;
     this.isError = false;
   }
 
-  onUpload() {
+  onUpload(): void {
     this.isImported = false;
     this.isError = false;
       this.importService.importSchedule(this.selectedFile, this.currentSection)

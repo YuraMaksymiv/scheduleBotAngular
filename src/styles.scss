@@ -111,6 +111,7 @@ table {
   min-height: 100%;
   background-color: #bce7c8;
   margin: auto;
+  padding-bottom: 30px;
 }
 
 .page_header {
@@ -318,7 +319,7 @@ import_progress {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin: 80px auto;
+  margin: 80px auto 40px;
   padding: 40px;
   max-width: 80%;
   background-color: #90d7a4;
@@ -342,7 +343,18 @@ import_progress {
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  margin: 80px auto;
+  margin: 40px auto;
+  padding: 40px;
+  max-width: 80%;
+  background-color: #90d7a4;
+}
+
+.notification_content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 40px auto;
   padding: 40px;
   max-width: 80%;
   background-color: #90d7a4;

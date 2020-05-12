@@ -1,19 +1,30 @@
 <div class="notification_header">
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text">Надіслати всім</p></mat-card>
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text">Надіслати для інституту</p></mat-card>
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text">Надіслати для групи</p></mat-card>
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text">Надіслати старостам</p></mat-card>
+  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToAllClick()">Надіслати всім</p></mat-card>
+  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToSectionClick()">Надіслати для інституту</p></mat-card>
+  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToGroupsClick()">Надіслати для групи</p></mat-card>
+  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToMonitorsClick()">Надіслати старостам</p></mat-card>
 </div>
 
-<div class="notification_content">
-  
+<div *ngIf="isSectionActive" class="notification_content">
+  <div *ngIf="isSectionActive">
+    <mat-form-field>
+      <mat-label>Виберіть інститут</mat-label>
+      <mat-select [(ngModel)]="currentSection">
+        <mat-option *ngFor="let section of sections" [value]="section">
+          {{section}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>
 
-<div class="notification_text">
+<div class="notification_text" *ngIf="isInputActive || currentSection">
   <mat-form-field class="notification_text_input">
     <mat-label>Напишіть оголошення</mat-label>
-    <textarea matInput placeholder="..."></textarea>
+    <textarea matInput placeholder="..." [(ngModel)]="notificationText"></textarea>
   </mat-form-field>
 
-  <button class="notification_send_button" mat-raised-button>Надіслати</button>
+  <button *ngIf="notificationText && !isDone" class="notification_send_button" mat-raised-button (click)="sendNotification()">Надіслати</button>
+  <button *ngIf="isDone" class="notification_send_button" mat-raised-button >Надіслано</button>
+  <p *ngIf="isError">{{errorMessage}}</p>
 </div>
