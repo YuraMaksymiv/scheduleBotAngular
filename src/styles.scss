@@ -204,7 +204,7 @@ table {
 
 .item_input {
   width: 100%;
-  background-color: #e8f7ec;
+  //background-color: #e8f7ec;
   color: #474747;
   //font-weight: bold;
   font-size: 16px;
@@ -215,7 +215,7 @@ table {
 }
 
 .item_output {
-  background-color: #e8f7ec;
+  //background-color: #e8f7ec;
 }
 
 .table_spinner {
@@ -256,9 +256,11 @@ table {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .import_file_item {
+  width: 30%;
   margin-bottom: 20px;
 }
 
@@ -268,8 +270,23 @@ table {
   font-weight: bolder;
 }
 
-import_progress {
-  margin: 40px;
+.progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.import_file_selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+}
+
+.import_file_name {
+  margin-right: 10px;
 }
 
 //users
@@ -293,6 +310,11 @@ import_progress {
   width: 260px;
   margin-left: 30px;
   font-size: 14px;
+}
+
+.users_table_other {
+  width: 10px;
+  padding: 10px !important;
 }
 
 //about

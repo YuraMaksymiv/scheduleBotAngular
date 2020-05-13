@@ -20,7 +20,7 @@ export class ScheduleItemComponent implements OnInit {
     this.isItemFocused = false;
     if(!value || value === '') value = '-/-';
     this.inputItem.lessonName = value;
-    this.onChanged.emit(value);
+    this.onChanged.emit(this.inputItem);
   }
 
   changeFocus(): void{
@@ -28,14 +28,8 @@ export class ScheduleItemComponent implements OnInit {
     this.isItemFocused = !this.isItemFocused;
   }
 
-  checkLessonType(lesson): void {
-    if(lesson.isCloned) {
-      (document.querySelector('.item_output') as HTMLElement).style.background = "#ffcccc";
-    }
-  }
 
   ngOnInit() {
-    this.checkLessonType(this.inputItem)
   }
 
 }

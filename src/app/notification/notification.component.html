@@ -1,8 +1,8 @@
 <div class="notification_header">
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToAllClick()">Надіслати всім</p></mat-card>
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToSectionClick()">Надіслати для інституту</p></mat-card>
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToGroupsClick()">Надіслати для групи</p></mat-card>
-  <mat-card class="notification_header_item" ><p class="notification_header_item_text" (click)="sendToMonitorsClick()">Надіслати старостам</p></mat-card>
+  <mat-card class="notification_header_item" (click)="sendToAllClick()"><p class="notification_header_item_text" >Надіслати всім</p></mat-card>
+  <mat-card class="notification_header_item" (click)="sendToSectionClick()"><p class="notification_header_item_text" >Надіслати для інституту</p></mat-card>
+  <mat-card class="notification_header_item" (click)="sendToGroupsClick()"><p class="notification_header_item_text" >Надіслати для групи</p></mat-card>
+  <mat-card class="notification_header_item" (click)="sendToMonitorsClick()"><p class="notification_header_item_text" >Надіслати старостам</p></mat-card>
 </div>
 
 <div *ngIf="isSectionActive" class="notification_content">

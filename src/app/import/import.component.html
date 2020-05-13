@@ -1,4 +1,10 @@
 <div class="import_content">
+
+
+  <div class="progress" *ngIf="!isImported">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
   <div class="import_section_item">
     <mat-form-field>
       <mat-label>Виберіть інститут</mat-label>
@@ -15,16 +21,17 @@
       style="display: none"
       type="file" (change)="onFileChanged($event)"
       #fileInput>
-    <button class="import_button" mat-raised-button (click)="fileInput.click()">Вибрати файл</button>
+
+    <div class="import_file_selected">
+      <p *ngIf="isFileSelect" class="import_file_name">{{selectedFile.name}}</p>
+      <button class="import_button" mat-raised-button (click)="fileInput.click()">Вибрати файл</button>
+    </div>
   </div>
 
   <button class="import_button" mat-raised-button *ngIf="isFileSelect" (click)="onUpload()">Завантажити</button>
 
   <p *ngIf="isDone">Завантажено успішно</p>
   <p *ngIf="isError">Помилка завантаження</p>
-  <div *ngIf="!isImported" class="import_progress">
-    <mat-spinner diameter="40"></mat-spinner>
-  </div>
 
 </div>
 
