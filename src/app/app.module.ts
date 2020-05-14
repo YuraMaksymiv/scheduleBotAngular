@@ -7,12 +7,13 @@ import { AppComponent } from './app.component';
 import { GroupsComponent } from './groups/groups.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatExpansionModule,
-  MatInputModule,
-  MatListModule,
-  MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
-  MatSelectModule, MatSortModule,
-  MatTableModule
+    MatAutocompleteModule,
+    MatButtonModule, MatExpansionModule,
+    MatInputModule,
+    MatListModule,
+    MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
+    MatSelectModule, MatSortModule,
+    MatTableModule
 } from '@angular/material';
 import {MatCardModule} from '@angular/material';
 import {GroupListsComponent} from './groups/group-lists/group-lists.component';
@@ -67,28 +68,29 @@ const routes: Routes = [
     AboutComponent,
     NotificationComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatListModule,
-    MatCardModule,
-    MatTableModule,
-    RouterModule.forRoot(routes),
-    MatRippleModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    FormsModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatMenuModule,
-    MatExpansionModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatListModule,
+        MatCardModule,
+        MatTableModule,
+        RouterModule.forRoot(routes),
+        MatRippleModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        FormsModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatSortModule,
+        MatMenuModule,
+        MatExpansionModule,
+        MatAutocompleteModule
+    ],
   providers: [TokenGuard,
     LoginGuard,
     GroupsService, {

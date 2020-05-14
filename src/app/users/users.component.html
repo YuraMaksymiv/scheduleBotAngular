@@ -36,6 +36,11 @@
       <td mat-cell *matCellDef="let element"> {{element.groupsName}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="subGroupsName">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Підгрупа </th>
+      <td mat-cell *matCellDef="let element"> {{element.subGroupsName}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="userType">
       <th mat-header-cell mat-sort-header *matHeaderCellDef> Тип користувача </th>
       <td mat-cell *matCellDef="let element">

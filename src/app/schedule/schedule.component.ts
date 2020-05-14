@@ -30,6 +30,7 @@ export class ScheduleComponent implements OnInit {
   params: any;
   isEdit = false;
   isTableReady = false;
+  notSchedue = false;
 
 
   onChanged(increased, lessonIndex, dayIndex, columnIndex){
@@ -46,6 +47,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   getScheduleByName(groupName): void {
+    this.notSchedue = false;
     const startTime = new Date().getTime();
     this.scheduleService.getSchedule(groupName)
       .subscribe((response: any) => {
@@ -58,6 +60,8 @@ export class ScheduleComponent implements OnInit {
           setTimeout(() => {
             this.isTableReady = true;
           }, delay);
+        } else {
+          this.notSchedue = true;
         }
       });
   };

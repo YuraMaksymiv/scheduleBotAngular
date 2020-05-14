@@ -1,24 +1,43 @@
 <div class="notification_header">
-  <mat-card class="notification_header_item" (click)="sendToAllClick()"><p class="notification_header_item_text" >Надіслати всім</p></mat-card>
-  <mat-card class="notification_header_item" (click)="sendToSectionClick()"><p class="notification_header_item_text" >Надіслати для інституту</p></mat-card>
-  <mat-card class="notification_header_item" (click)="sendToGroupsClick()"><p class="notification_header_item_text" >Надіслати для групи</p></mat-card>
-  <mat-card class="notification_header_item" (click)="sendToMonitorsClick()"><p class="notification_header_item_text" >Надіслати старостам</p></mat-card>
+  <mat-card [ngClass]="{notification_active_button: sendTo === 0}" class="notification_header_item" (click)="sendToAllClick()"><p class="notification_header_item_text" >Надіслати всім</p></mat-card>
+  <mat-card [ngClass]="{notification_active_button: sendTo === 1}" class="notification_header_item" (click)="sendToSectionClick()"><p class="notification_header_item_text" >Надіслати для інституту</p></mat-card>
+  <mat-card [ngClass]="{notification_active_button: sendTo === 2}" class="notification_header_item" (click)="sendToGroupsClick()"><p class="notification_header_item_text" >Надіслати для групи</p></mat-card>
+  <mat-card [ngClass]="{notification_active_button: sendTo === 3}" class="notification_header_item" (click)="sendToMonitorsClick()"><p class="notification_header_item_text" >Надіслати старостам</p></mat-card>
 </div>
 
 <div *ngIf="isSectionActive" class="notification_content">
   <div *ngIf="isSectionActive">
     <mat-form-field>
       <mat-label>Виберіть інститут</mat-label>
-      <mat-select [(ngModel)]="currentSection">
+      <mat-select (selectionChange)="getGroups()" [(ngModel)]="currentSection">
         <mat-option *ngFor="let section of sections" [value]="section">
           {{section}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
+
+  <div *ngIf="currentSection && sendTo === 2">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input type="text"
+               placeholder="Виберіть групу"
+               aria-label=""
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (onSelectionChange)="setGroup($event)">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
 </div>
 
-<div class="notification_text" *ngIf="isInputActive || currentSection">
+
+<div class="notification_text" *ngIf="isInputActive || (currentSection && sendTo !== 2) || (currentGroup && sendTo === 2)">
   <mat-form-field class="notification_text_input">
     <mat-label>Напишіть оголошення</mat-label>
     <textarea matInput placeholder="..." [(ngModel)]="notificationText"></textarea>

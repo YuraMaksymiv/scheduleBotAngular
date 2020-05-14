@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ImportService} from '../services/import.service';
 import {NotificationsService} from '../services/notifications.service';
 import {group} from '@angular/animations';
+import {GroupsService} from '../services/groups.service';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-notification',
@@ -11,8 +14,12 @@ import {group} from '@angular/animations';
 export class NotificationComponent implements OnInit {
 
   constructor(
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private groupService: GroupsService
   ) { }
+
+  myControl = new FormControl();
+  filteredOptions: Observable<string[]>;
 
   isInputActive: boolean = false;
   isSectionActive: boolean = false;
@@ -24,6 +31,7 @@ export class NotificationComponent implements OnInit {
   isError: boolean = false;
   errorMessage: string;
   isDone: boolean = false;
+  groups: any;
 
   changeOption(): void {
     this.isError = false;
@@ -35,28 +43,28 @@ export class NotificationComponent implements OnInit {
   sendToAllClick(): void {
     this.changeOption();
     this.isSectionActive = false;
-    this.isInputActive = !this.isInputActive;
+    this.isInputActive = true;
     this.sendTo = 0;
   }
 
   sendToSectionClick(): void {
     this.changeOption();
     this.isInputActive = false;
-    this.isSectionActive = !this.isSectionActive;
+    this.isSectionActive = true;
     this.sendTo = 1;
   }
 
   sendToGroupsClick(): void {
     this.changeOption();
     this.isInputActive = false;
-    this.isSectionActive = !this.isSectionActive;
+    this.isSectionActive = true;
     this.sendTo = 2;
   }
 
   sendToMonitorsClick(): void {
     this.changeOption();
     this.isInputActive = false;
-    this.isSectionActive = !this.isSectionActive;
+    this.isSectionActive = true;
     this.sendTo = 3;
   }
 
@@ -109,6 +117,31 @@ export class NotificationComponent implements OnInit {
           })
         break;
     }
+  }
+
+  getGroups(): void {
+    if(this.currentSection && this.sendTo === 2) {
+    this.groupService.getMainGroupsBySection(this.currentSection)
+      .subscribe((response: any) => {
+        if (response) {
+          this.groups = response;
+          this.filteredOptions = this.myControl.valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+        }
+      });
+    }
+  }
+
+  setGroup(group): void {
+    this.currentGroup = group.source.value;
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.groups.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   ngOnInit() {

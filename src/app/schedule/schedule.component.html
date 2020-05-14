@@ -14,8 +14,12 @@
     <p *ngIf="updatingError" style="color: red">{{updatingError}}</p>
   </div>
 
-  <div *ngIf="!isTableReady" class="table_spinner">
+  <div *ngIf="!isTableReady && !notSchedue" class="table_spinner">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <div *ngIf="notSchedue" class="schedule_not_exists">
+    <p>Не знайдено розкладу для даної групи</p>
   </div>
 
   <table *ngIf="isTableReady" class="schedule_table">

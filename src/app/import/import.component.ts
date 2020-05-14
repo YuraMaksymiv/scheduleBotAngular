@@ -31,7 +31,7 @@ export class ImportComponent implements OnInit {
 
   onFileChanged(event): void {
     this.selectedFile = event.target.files[0];
-    this.isFileSelect = true;
+    if(this.selectedFile && this.selectedFile.name) this.isFileSelect = true;
     this.isError = false;
   }
 

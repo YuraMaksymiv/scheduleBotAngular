@@ -19,6 +19,10 @@ export class GroupsService {
     return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups/groupsListBySection/${section}`, {headers: {token: localStorage.getItem('token')}});
   }
 
+  public getMainGroupsBySection(section): Observable<APIResponse> {
+    return this.http.get<APIResponse>(`${Hosts.API_HOST}/api/groups/mainGroupsBySection/${section}`, {headers: {token: localStorage.getItem('token')}});
+  }
+
   public getUsersForGroup(groupName): Observable<APIResponse> {
     return this.http.post<APIResponse>((`${Hosts.API_HOST}/api/user/getUsersForGroup`), {group: groupName}, {headers: {token: localStorage.getItem('token')}});
   }

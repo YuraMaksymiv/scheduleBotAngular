@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['userId', 'username', 'name', 'section', 'groupsName', 'userType', 'createdAt', 'button'];
+  displayedColumns: string[] = ['userId', 'username', 'name', 'section', 'groupsName', 'subGroupsName', 'userType', 'createdAt', 'button'];
   dataSource = new MatTableDataSource();
 
   applyFilter(event: Event) {
@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
         })
     }
   }
-  
+
   sendNotification(userId): void {
     let text = prompt('Введіть повідомлення');
     if(text) {
