@@ -91,7 +91,7 @@ export class ScheduleComponent implements OnInit {
       .subscribe((response: any) => {
         if (response) {
           this.updated = response;
-          this.getScheduleByName(this.updated.groupName);
+          this.getScheduleByName(this.updated.data.groupName);
           this.isEdit = !this.isEdit;
         }
       });
