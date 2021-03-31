@@ -1,8 +1,8 @@
 <div>
-  <p class="item_output card" [ngStyle]="{background: inputItem.isCloned ? '#e8f7ec' : '#ffe5e5'}" *ngIf="!isItemFocused" (click)="changeFocus()">
-    {{inputItem.lessonName}}
+  <p class="item_output card" [ngStyle]="{background:  '#e8f7ec'}" *ngIf="!isItemFocused" (click)="changeFocus()">
+    {{inputItem.nameOfLesson}}
   </p>
   <p *ngIf="isItemFocused" >
-    <input class="item_input" [ngStyle]="{background: inputItem.isCloned ? '#e8f7ec' : '#ffe5e5'}" type="text" #f  value="{{inputItem.lessonName}}" (blur)="changeEvent(f.value)" (keyup.enter)="changeEvent(f.value)">
+    <input class="item_input" [ngStyle]="{background:  '#e8f7ec'}" type="text" #f  value="{{inputItem.nameOfLesson}}" (blur)="changeEvent(f.value)" (keyup.enter)="changeEvent(f.value)">
   </p>
 </div>

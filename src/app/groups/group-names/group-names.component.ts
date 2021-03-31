@@ -21,7 +21,7 @@ export class GroupNamesComponent implements OnInit {
   groupNames: any;
   groupsLength: any;
   data = [];
-  size = 4;
+  size = 6;
   page = 0;
 
   getData(obj) {

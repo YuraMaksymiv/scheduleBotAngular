@@ -2,12 +2,12 @@
                [length]="groupsLength"
                [pageSize]="size"
                [pageIndex]="page"
-               [pageSizeOptions]="[4, 8, 12]"
+               [pageSizeOptions]="[8, 12, 24]"
                (page)="getData($event)">
 </mat-paginator>
 
 <div *ngFor="let group of data" class="list_item">
-  <mat-card class="card" [routerLink]= "['/sections', section, 'groups' , group.groupName]">{{group.groupName}}</mat-card>
+  <mat-card class="card" [routerLink]= "['/sections', section, 'groups' , group.groupName]">{{group.groupName.toUpperCase()}}</mat-card>
 </div>
 
 

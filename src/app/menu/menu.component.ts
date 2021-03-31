@@ -32,6 +32,10 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/about']);
   }
 
+  sandboxClick() : void {
+    this.router.navigate(['/sandbox']);
+  }
+
   ngOnInit() {
   }
 

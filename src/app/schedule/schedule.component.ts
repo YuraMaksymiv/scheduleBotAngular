@@ -40,7 +40,7 @@ export class ScheduleComponent implements OnInit {
     this.currentSchedule[dayIndex].lesson.forEach(i => {
       if(i.numberOfLesson === lessonNumber) {
         isLessonExist = true;
-        i.nameOfLesson[columnIndex] = increased;
+        i = increased;
       }
     });
     this.print = true;

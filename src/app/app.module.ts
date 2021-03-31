@@ -36,6 +36,10 @@ import {AboutComponent} from './about/about.component';
 import {UserService} from './services/user.service';
 import {MatMenuModule} from '@angular/material/typings/esm5/menu';
 import { NotificationComponent } from './notification/notification.component';
+import { SandboxComponent } from './sandbox/sandbox.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:2337', options: {} };
 
 
 const routes: Routes = [
@@ -49,7 +53,8 @@ const routes: Routes = [
   {path: 'import', component: ImportComponent, canActivate: [TokenGuard]},
   {path: 'users', component: UsersComponent, canActivate: [TokenGuard]},
   {path: 'notifications', component: NotificationComponent, canActivate: [TokenGuard]},
-  {path: 'about', component: AboutComponent, canActivate: [TokenGuard]}
+  {path: 'about', component: AboutComponent, canActivate: [TokenGuard]},
+  {path: 'sandbox', component: SandboxComponent, canActivate: [TokenGuard]}
 ];
 
 @NgModule({
@@ -66,7 +71,8 @@ const routes: Routes = [
     ImportComponent,
     UsersComponent,
     AboutComponent,
-    NotificationComponent
+    NotificationComponent,
+    SandboxComponent
   ],
     imports: [
         BrowserModule,
@@ -89,7 +95,8 @@ const routes: Routes = [
         MatSortModule,
         MatMenuModule,
         MatExpansionModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        SocketIoModule.forRoot(config),
     ],
   providers: [TokenGuard,
     LoginGuard,

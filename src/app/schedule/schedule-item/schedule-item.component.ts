@@ -19,7 +19,7 @@ export class ScheduleItemComponent implements OnInit {
   changeEvent(value: any): void{
     this.isItemFocused = false;
     if(!value || value === '') value = '-/-';
-    this.inputItem.lessonName = value;
+    this.inputItem.nameOfLesson = value;
     this.onChanged.emit(this.inputItem);
   }
 

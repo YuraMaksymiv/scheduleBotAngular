@@ -28,7 +28,8 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #e8f7ec}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #e8f7ec
+}
 
 table {
   border-collapse: collapse;
@@ -194,7 +195,7 @@ table {
 }
 
 .table_time_row {
-  width: 8%;
+  width: 12%;
   border-top: 3px solid #b2b2b2;
   border-left: 3px solid #b2b2b2;
   text-align: center;
@@ -250,6 +251,19 @@ table {
 
 .menu-text {
   padding: 20px;
+}
+
+.message-item {
+  flex-basis: 35%;
+  margin: 10px auto;
+  max-width: 70%;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.menu-text {
+  padding: 10px;
 }
 
 //import

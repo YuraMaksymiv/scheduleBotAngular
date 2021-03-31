@@ -19,7 +19,7 @@ export class GroupListsComponent implements OnInit {
   groupsLength: any;
   section: any;
   data = [];
-  size = 4;
+  size = 8;
   page = 0;
 
   getData(obj) {
